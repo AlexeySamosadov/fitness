@@ -1,5 +1,7 @@
-node_modules/**/*
-.expo/*
+node_modules/
+.expo/
+expo-permissions/
+expo-video-thumbnails/
 npm-debug.*
 *.jks
 *.p8
