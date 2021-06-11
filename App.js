@@ -1,11 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Button, Platform } from 'react-native'
-import {
-	createDrawerNavigator,
-	DrawerContentScrollView,
-	DrawerItemList,
-	DrawerItem,
-} from '@react-navigation/drawer'
+import React from 'react'
+import { Platform } from 'react-native'
+import { createDrawerNavigator } from '@react-navigation/drawer'
 import { NavigationContainer } from '@react-navigation/native'
 import { ReadyLessons } from './src/Screens/ReadyLessons'
 import { VideoComponent } from './src/Screens/Video'
