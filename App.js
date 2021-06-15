@@ -39,6 +39,7 @@ export default function App() {
 					name="homeFit"
 					options={({ navigation }) => ({
 						title: 'Фитнес дома',
+						headerShown: true,
 						headerTintColor: 'green',
 						headerLeft: () => (
 							<HeaderButtons HeaderButtonComponent={AppHeaderIcon}>

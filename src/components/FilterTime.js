@@ -8,6 +8,7 @@ import {
 	TouchableOpacity,
 	SafeAreaView,
 	ScrollView,
+	Animated,
 } from 'react-native'
 const arr = [10, 15, 25, 35, 45, 55, 65, 75, 85, 95]
 
@@ -20,20 +21,18 @@ const PointWithTime = ({ min }) => (
 	</>
 )
 
-export const FilterTime = ({ hei }) => {
+export const FilterTime = () => {
 	return (
-		<View style={{ ...styles.container, height: hei }}>
-			<ScrollView horizontal={true}>
-				<View style={styles.filter}>
-					<View>
-						<Entypo name="500px" size={24} color="green" />
-					</View>
-
-					{arr.map((it, i) => (
-						<PointWithTime key={i.toString()} min={it} />
-					))}
+		<View style={styles.container}>
+			<View style={styles.filter}>
+				<View>
+					<Entypo name="500px" size={24} color="green" />
 				</View>
-			</ScrollView>
+
+				{arr.map((it, i) => (
+					<PointWithTime key={i.toString()} min={it} />
+				))}
+			</View>
 		</View>
 	)
 }
@@ -41,6 +40,13 @@ export const FilterTime = ({ hei }) => {
 const styles = StyleSheet.create({
 	container: {
 		paddingHorizontal: 10,
+		backgroundColor: '#121212',
+		position: 'relative',
+		top: 0,
+		left: 0,
+		right: 0,
+		elevation: 4,
+		height: 44,
 		// height: 49,
 		// maxHeight: 50,
 	},
