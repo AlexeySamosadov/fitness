@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import {
 	View,
 	StyleSheet,
@@ -6,6 +6,7 @@ import {
 	SafeAreaView,
 	ScrollView,
 	Animated,
+	Platform,
 } from 'react-native'
 import { Card } from './Card'
 import { FilterTime } from './FilterTime'
@@ -136,27 +137,22 @@ const _renderItem = ({ item, onOpen }) => (
 		/>
 	</SafeAreaView>
 )
-const BANNER_H = 50
-const AnimatedFlat = Animated.createAnimatedComponent(FlatList)
 
 export const CardList = ({ onOpen }) => {
 	const scrollY = new Animated.Value(0)
-	const diffClamp = Animated.diffClamp(scrollY, 0, 45)
+	const diffClamp = Animated.diffClamp(scrollY, 0, 40)
 	const translateY = diffClamp.interpolate({
-		inputRange: [0, 44],
-		outputRange: [0, -44],
+		inputRange: Platform.OS === 'android' ? [0, 40] : [0, 20, 40],
+		outputRange: Platform.OS === 'android' ? [0, -40] : [0, 20, -40],
 	})
 	const animatedHeaderHeight = diffClamp.interpolate({
-		inputRange: [0, 44],
-		outputRange: [44, 0],
-		extrapolate: 'clamp',
+		inputRange: Platform.OS === 'android' ? [0, 40] : [0, 20, 40],
+		outputRange: Platform.OS === 'android' ? [40, 0] : [40, 10, 0],
 	})
 
-	// const [state, setState] = useState(-1)
-	// const [visible, setVisible] = useState(true)
 	return (
-		<View style={styles.wrapper}>
-			<View style={styles.sss}>
+		<View>
+			<View>
 				<Animated.View
 					style={{
 						height: animatedHeaderHeight,
@@ -170,19 +166,11 @@ export const CardList = ({ onOpen }) => {
 				</Animated.View>
 			</View>
 			<Animated.FlatList
-				// onScroll={Animated.event(
-				// 	[{ nativeEvent: { contentOffset: { y: ScrollY } } }],
-				// 	{
-				// 		useNativeDriver: true,
-				// 	}
-				// )}
-				// contentContainerStyle={{ marginTop: 44 }}
+				bounces={false}
 				onScroll={(e) => {
 					scrollY.setValue(e.nativeEvent.contentOffset.y)
 				}}
-				scrollEventThrottle={16}
-				// onMomentumScrollEnd={(e) => setState(e.nativeEvent.contentOffset.y)}
-				style={styles.flat}
+				scrollEventThrottle={1}
 				data={data}
 				keyExtractor={(post) => post.id.toString()}
 				renderItem={({ item }) => {
@@ -192,36 +180,3 @@ export const CardList = ({ onOpen }) => {
 		</View>
 	)
 }
-const styles = StyleSheet.create({
-	wrapper: {
-		// flex: 1,
-		// marginTop: 0,
-		// padding: 0,
-		// marginBottom: 80,
-		// backgroundColor: '#121212',
-	},
-	flat: {
-		margin: 0,
-		padding: 0,
-	},
-	test: (ScrollY) => ({
-		backgroundColor: 'red',
-		height: 50,
-		borderWidth: 2,
-		borderColor: 'red',
-		transform: [
-			{
-				translateY: ScrollY.interpolate({
-					inputRange: [0, 180],
-					outputRange: [0, -180],
-					extrapolate: 'clamp',
-				}),
-			},
-		],
-	}),
-	sss: {
-		// alignItems: 'center',
-		// overflow: 'hidden',
-		// height: visible ? 50 : 0,
-	},
-})

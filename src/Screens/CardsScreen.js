@@ -17,6 +17,9 @@ export const CardsScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	container: {
+		backgroundColor: '#121212',
+		zIndex: 50,
+		elevation: 4,
 		// marginTop: 20,
 	},
 })

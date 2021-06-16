@@ -10,6 +10,7 @@ import {
 	ScrollView,
 	Animated,
 } from 'react-native'
+import { Platform } from 'react-native'
 const arr = [10, 15, 25, 35, 45, 55, 65, 75, 85, 95]
 
 const PointWithTime = ({ min }) => (
@@ -26,7 +27,7 @@ export const FilterTime = () => {
 		<View style={styles.container}>
 			<View style={styles.filter}>
 				<View>
-					<Entypo name="500px" size={24} color="green" />
+					<Entypo style={styles.entypo} name="500px" size={24} color="green" />
 				</View>
 
 				{arr.map((it, i) => (
@@ -46,15 +47,16 @@ const styles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		elevation: 4,
-		height: 44,
-		// height: 49,
-		// maxHeight: 50,
+		height: 40,
 	},
 	filter: {
 		paddingVertical: 10,
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
+	},
+	entypo: {
+		marginTop: Platform.OS === 'android' ? 0 : -3,
 	},
 	text: {
 		fontSize: 16,
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
 		marginLeft: 7,
 		width: 5,
 		height: 5,
-		borderRadius: 100 / 2,
+		borderRadius: 50,
 		backgroundColor: 'gray',
 		color: 'gray',
 	},
