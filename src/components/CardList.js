@@ -140,7 +140,9 @@ const _renderItem = ({ item, onOpen }) => (
 
 export const CardList = ({ onOpen }) => {
 	const scrollY = new Animated.Value(0)
+
 	const diffClamp = Animated.diffClamp(scrollY, 0, 40)
+
 	const translateY = diffClamp.interpolate({
 		inputRange: Platform.OS === 'android' ? [0, 40] : [0, 20, 40],
 		outputRange: Platform.OS === 'android' ? [0, -40] : [0, 20, -40],
